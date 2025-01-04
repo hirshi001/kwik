@@ -18,6 +18,7 @@
  */
 package net.luminis.quic;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,7 +41,7 @@ public class KwikVersion {
         InputStream in = QuicConnection.class.getResourceAsStream("version.properties");
         if (in != null) {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-                version = reader.readLine();
+                version = BoundedLineReader.readLine(reader, 5_000_000);
             } catch (IOException e) {
                 version = "unknown";
             }

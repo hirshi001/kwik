@@ -18,6 +18,7 @@
  */
 package net.luminis.quic.cli;
 
+import io.github.pixee.security.BoundedLineReader;
 import net.luminis.quic.cid.ConnectionIdStatus;
 import net.luminis.quic.impl.QuicClientConnectionImpl;
 import net.luminis.quic.impl.TransportParameters;
@@ -113,7 +114,7 @@ public class InteractiveShell {
 
             running = true;
             while (running) {
-                String cmdLine = in.readLine();
+                String cmdLine = BoundedLineReader.readLine(in, 5_000_000);
                 if (! cmdLine.isBlank()) {
                     String cmd = cmdLine.split(" ")[0];
                     List<String> matchingCommands = commands.keySet().stream().filter(command -> command.startsWith(cmd)).collect(Collectors.toList());
