@@ -18,6 +18,7 @@
  */
 package net.luminis.quic.packet;
 
+import java.security.SecureRandom;
 import net.luminis.quic.common.EncryptionLevel;
 import net.luminis.quic.common.PnSpace;
 import net.luminis.quic.crypto.Aead;
@@ -39,7 +40,7 @@ public class VersionNegotiationPacket extends QuicPacket {
 
     // Minimal length for a valid packet:  type version dcid len dcid scid len scid version
     private static int MIN_PACKET_LENGTH = 1 +  4 +     1 +      0 +  1 +      0 +  4;
-    private static Random random = new Random();
+    private static Random random = new SecureRandom();
 
     private byte[] sourceConnectionId;
     private int packetSize;
