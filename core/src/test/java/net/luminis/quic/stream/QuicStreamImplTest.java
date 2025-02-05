@@ -18,6 +18,7 @@
  */
 package net.luminis.quic.stream;
 
+import java.security.SecureRandom;
 import net.luminis.quic.common.EncryptionLevel;
 import net.luminis.quic.impl.QuicConnectionImpl;
 import net.luminis.quic.impl.Role;
@@ -67,7 +68,7 @@ class QuicStreamImplTest {
     private QuicStreamImpl quicStream;
     private StreamManager streamManager;
     private Logger logger;
-    private Random randomGenerator = new Random();
+    private Random randomGenerator = new SecureRandom();
     private Role role;
 
     //region setup
