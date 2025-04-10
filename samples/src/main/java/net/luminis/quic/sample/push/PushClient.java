@@ -18,6 +18,7 @@
  */
 package net.luminis.quic.sample.push;
 
+import io.github.pixee.security.BoundedLineReader;
 import net.luminis.quic.QuicClientConnection;
 import net.luminis.quic.QuicStream;
 import net.luminis.quic.log.SysOutLogger;
@@ -84,7 +85,7 @@ public class PushClient {
         BufferedReader inputStream = new BufferedReader(new InputStreamReader(quicStream.getInputStream()));
         try {
             while (true) {
-                String line = inputStream.readLine();
+                String line = BoundedLineReader.readLine(inputStream, 5_000_000);
                 System.out.println("Received " + line);
             }
         }

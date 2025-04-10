@@ -18,6 +18,7 @@
  */
 package net.luminis.quic.server.h09;
 
+import io.github.pixee.security.BoundedLineReader;
 import net.luminis.quic.KwikVersion;
 import net.luminis.quic.QuicConnection;
 import net.luminis.quic.QuicConstants;
@@ -112,7 +113,7 @@ public class Http09Connection implements ApplicationProtocolConnection {
 
     String extractPathFromRequest(InputStream input) throws IOException {
         BufferedReader inputReader = new BufferedReader(new InputStreamReader(new LimitedInputStream(input, MAX_REQUEST_SIZE)));
-        String line = inputReader.readLine();
+        String line = BoundedLineReader.readLine(inputReader, 5_000_000);
         Matcher matcher = Pattern.compile("GET\\s+/?(\\S+)").matcher(line);
         if (matcher.matches()) {
             return matcher.group(1);
