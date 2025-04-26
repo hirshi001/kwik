@@ -18,6 +18,8 @@
  */
 package net.luminis.quic.cli;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import net.luminis.quic.KwikVersion;
 import net.luminis.quic.QuicClientConnection;
 import net.luminis.quic.QuicConnection;
@@ -223,7 +225,7 @@ public class KwikCli {
             try {
                 if (arg.startsWith("http://") || arg.startsWith("https://")) {
                     try {
-                        URL url = new URL(arg);
+                        URL url = Urls.create(arg, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                         builder.uri(url.toURI());
                         if (!url.getPath().isEmpty()) {
                             httpRequestPath = url.getPath();
