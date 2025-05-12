@@ -18,6 +18,7 @@
  */
 package net.luminis.quic.crypto;
 
+import java.security.SecureRandom;
 import net.luminis.quic.common.EncryptionLevel;
 import net.luminis.quic.impl.Role;
 import net.luminis.quic.impl.TransportError;
@@ -237,7 +238,7 @@ class CryptoStreamTest {
     void writingDataThatDoesNotFitInFrameLeadsToMultipleCallbacks() {
         // Given
         byte[] dataToSend = new byte[1800];
-        new Random().nextBytes(dataToSend);
+        new SecureRandom().nextBytes(dataToSend);
 
         // When
         cryptoStream.write(dataToSend);
@@ -269,7 +270,7 @@ class CryptoStreamTest {
     void dataInMultipleWritesIsConcatenatedIntoStream() {
         // Given
         byte[] dataToSend = new byte[1800];
-        new Random().nextBytes(dataToSend);
+        new SecureRandom().nextBytes(dataToSend);
 
         // When
         cryptoStream.write(Arrays.copyOfRange(dataToSend, 0, 200));

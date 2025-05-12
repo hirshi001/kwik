@@ -1,5 +1,6 @@
 package net.luminis.quic.stream;
 
+import java.security.SecureRandom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -549,7 +550,7 @@ class ReceiveBufferImplTest {
 
     @Test
     void testRandomStreamElementAdditions() {
-        Random random = new Random();
+        Random random = new SecureRandom();
         int streamEnd = 100_000;
         int added = 0;
         String bufferContentBefore = "";

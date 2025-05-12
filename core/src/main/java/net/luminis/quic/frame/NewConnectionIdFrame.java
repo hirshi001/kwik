@@ -18,6 +18,7 @@
  */
 package net.luminis.quic.frame;
 
+import java.security.SecureRandom;
 import net.luminis.quic.generic.InvalidIntegerEncodingException;
 import net.luminis.quic.generic.VariableLengthInteger;
 import net.luminis.quic.impl.Version;
@@ -39,7 +40,7 @@ public class NewConnectionIdFrame extends QuicFrame {
     private int sequenceNr;
     private int retirePriorTo;
     private byte[] connectionId;
-    private static Random random = new Random();
+    private static Random random = new SecureRandom();
     private byte[] statelessResetToken;
 
     public NewConnectionIdFrame(Version quicVersion) {
