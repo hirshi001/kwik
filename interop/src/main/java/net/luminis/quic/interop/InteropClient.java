@@ -18,6 +18,8 @@
  */
 package net.luminis.quic.interop;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import net.luminis.quic.QuicClientConnection;
 import net.luminis.quic.QuicConnection;
 import net.luminis.quic.QuicSessionTicket;
@@ -109,7 +111,7 @@ public class InteropClient {
         try {
             List<URL> downloadUrls = new ArrayList<>();
             for (; currentArg < args.length; currentArg++) {
-                downloadUrls.add(new URL(args[currentArg]));
+                downloadUrls.add(Urls.create(args[currentArg], Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
             }
 
             QuicClientConnectionImpl.Builder builder = QuicClientConnectionImpl.newBuilder();
